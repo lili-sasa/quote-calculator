@@ -1,5 +1,55 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="报价计算器"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icons/icon-180.png"><title>报价计算器</title><style>
 :root{color-scheme:light;--border:#e5e7eb;--muted:#6b7280}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;background:#f5f5f7;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",Arial,sans-serif}.app{width:min(100%,560px);margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom))}h1{font-size:26px;margin:4px 0 20px;letter-spacing:-.5px}.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}label{display:block;font-size:14px;color:var(--muted);margin-bottom:8px}.field{margin-bottom:16px}.field:last-child{margin-bottom:0}input{width:100%;border:1px solid var(--border);border-radius:12px;padding:13px 14px;font-size:20px;outline:none;background:#fff}input:focus{border-color:#9ca3af;box-shadow:0 0 0 3px rgba(17,24,39,.07)}.unit{display:flex;align-items:center;gap:8px}.unit input{flex:1}.unit span{color:var(--muted);font-size:16px;min-width:30px}.fixed{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.fixed button{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px 8px;font-size:16px}.fixed button:active{transform:scale(.98);background:#f3f4f6}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{background:#f8f8fa;border-radius:14px;padding:15px}.result .title{color:var(--muted);font-size:14px;margin-bottom:7px}.result .value{font-size:26px;font-weight:700;letter-spacing:-.4px}.hint{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.5}.reset{width:100%;border:0;background:#111827;color:#fff;border-radius:12px;padding:12px;font-size:16px}@media(max-width:380px){.result-grid{grid-template-columns:1fr}}
-</style></head><body><main class="app"><h1>报价计算器</h1><section class="card"><div class="field"><label for="price">商品价格</label><div class="unit"><input id="price" type="number" inputmode="decimal" min="0" step="1" placeholder="例如 1860"><span>円</span></div></div><div class="field"><label for="rate">今日汇率</label><input id="rate" type="number" inputmode="decimal" min="0" step="0.001" value="0.043"></div><div class="field"><label for="light">轻货加价</label><div class="unit"><input id="light" type="number" inputmode="decimal" step="1" value="80"><span>元</span></div></div><div class="field"><label for="heavy">重货加价</label><div class="unit"><input id="heavy" type="number" inputmode="decimal" step="1" value="100"><span>元</span></div></div></section><section class="card"><div class="result-grid"><div class="result"><div class="title">轻货报价</div><div class="value" id="lightResult">—</div></div><div class="result"><div class="title">重货报价</div><div class="value" id="heavyResult">—</div></div></div><div class="hint" id="hint">300～1000円按固定报价；1001円以上按汇率＋加价计算。</div></section><section class="card"><label>固定报价（点击可直接填入价格）</label><div class="fixed"><button data-price="300">300円 → 20元</button><button data-price="400">400円 → 30元</button><button data-price="500">500円 → 40元</button><button data-price="600">600円 → 50元</button><button data-price="700">700円 → 60元</button><button data-price="800">800円 → 70元</button><button data-price="900">900円 → 80元</button><button data-price="1000">1000円 → 90元</button></div></section><section class="card"><button class="reset" id="reset">恢复默认设置</button></section></main><script>
+</style></head><body><main class="app">
+  <h1>报价计算器</h1>
+
+  <section class="card">
+    <div class="field">
+      <label for="price">商品价格</label>
+      <div class="unit"><input id="price" type="number" inputmode="decimal" min="0" step="1" placeholder="例如 1860"><span>円</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="result-grid">
+      <div class="result"><div class="title">轻货报价</div><div class="value" id="lightResult">—</div></div>
+      <div class="result"><div class="title">重货报价</div><div class="value" id="heavyResult">—</div></div>
+    </div>
+    <div class="hint" id="hint">输入商品价格后自动计算。</div>
+  </section>
+
+  <section class="card">
+    <div class="field">
+      <label for="rate">今日汇率</label>
+      <input id="rate" type="number" inputmode="decimal" min="0" step="0.001" value="0.043">
+    </div>
+    <div class="field">
+      <label for="light">轻货加价</label>
+      <div class="unit"><input id="light" type="number" inputmode="decimal" step="1" value="80"><span>元</span></div>
+    </div>
+    <div class="field">
+      <label for="heavy">重货加价</label>
+      <div class="unit"><input id="heavy" type="number" inputmode="decimal" step="1" value="100"><span>元</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <label>固定报价（点击可直接填入价格）</label>
+    <div class="fixed">
+      <button data-price="300">300円 → 20元</button>
+      <button data-price="400">400円 → 30元</button>
+      <button data-price="500">500円 → 40元</button>
+      <button data-price="600">600円 → 50元</button>
+      <button data-price="700">700円 → 60元</button>
+      <button data-price="800">800円 → 70元</button>
+      <button data-price="900">900円 → 80元</button>
+      <button data-price="1000">1000円 → 90元</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <button class="reset" id="reset">恢复默认设置</button>
+  </section>
+</main><script>
 (()=>{const price=document.getElementById('price'),rate=document.getElementById('rate'),light=document.getElementById('light'),heavy=document.getElementById('heavy'),lr=document.getElementById('lightResult'),hr=document.getElementById('heavyResult'),hint=document.getElementById('hint');const defaults={rate:.043,light:80,heavy:100};const saved=JSON.parse(localStorage.getItem('quoteSettings')||'null');if(saved){if(Number.isFinite(saved.rate))rate.value=saved.rate;if(Number.isFinite(saved.light))light.value=saved.light;if(Number.isFinite(saved.heavy))heavy.value=saved.heavy}const n=e=>{const v=parseFloat(e.value);return Number.isFinite(v)?v:0};const fixed=p=>{if(p>=300&&p<400)return 20;if(p>=400&&p<500)return 30;if(p>=500&&p<600)return 40;if(p>=600&&p<700)return 50;if(p>=700&&p<800)return 60;if(p>=800&&p<900)return 70;if(p>=900&&p<1000)return 80;if(p===1000)return 90;return null};const fmt=v=>Number.isInteger(v)?String(v):v.toFixed(2).replace(/0+$/,'').replace(/\.$/,'');const save=()=>localStorage.setItem('quoteSettings',JSON.stringify({rate:n(rate),light:n(light),heavy:n(heavy)}));function calc(){const p=n(price);if(!price.value||p<=0){lr.textContent='—';hr.textContent='—';hint.textContent='300～1000円按固定报价；1001円以上按汇率＋加价计算。';return}const f=fixed(p);if(f!==null){lr.textContent=f+' 元';hr.textContent=f+' 元';hint.textContent='当前价格属于固定报价区间，轻货和重货相同。'}else if(p>1000){lr.textContent=fmt(p*n(rate)+n(light))+' 元';hr.textContent=fmt(p*n(rate)+n(heavy))+' 元';hint.textContent=`${fmt(p)}円 × ${n(rate)} ＋ 加价`}else{lr.textContent='—';hr.textContent='—';hint.textContent='请输入 300円以上的商品价格。'}}[price,rate,light,heavy].forEach(el=>el.addEventListener('input',()=>{if(el!==price)save();calc()}));document.querySelectorAll('[data-price]').forEach(btn=>btn.addEventListener('click',()=>{price.value=btn.dataset.price;calc();price.focus()}));document.getElementById('reset').addEventListener('click',()=>{rate.value=defaults.rate;light.value=defaults.light;heavy.value=defaults.heavy;save();calc()});if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));calc()})();
 </script></body></html>
